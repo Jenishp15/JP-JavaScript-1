@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container {
+            background-color: lightyellow;
+            margin: auto;
+            text-align: center;
+            height: 500px;
+            width: 700px;
+            padding: 50px;
+            border: 1px solid grey;
+            font-family: poppins;
+        }
+
+        h1 {
+            color: darkgreen;
+            text-shadow: 2px 2px 5px white;
+        }
+
+        h2 {
+            color: crimson;
+            text-shadow: 2px 2px 5px lightcyan;
+        }
+
+        h3 {
+            color: darkmagenta;
+            text-shadow: 2px 2px 5px white;
+        }
+        span{
+            font-size:30px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Current time : </h1>
+        <span id="hour"></span>
+        <span id="min"></span>
+        <span id="sec"></span>
+        <h1>Time Rimening :</h1>
+        <h2 id="count"></h2>
+
+        <h3 id="qutoes"></h3>
+    </div>
+
+    <script>
+
+        setInterval(function () {
+
+            var now = new Date()
+            document.getElementById("hour").innerText=now.getHours() + ' :';
+            document.getElementById("min").innerText=now.getMinutes() + ' :';
+            document.getElementById("sec").innerText=now.getSeconds();
+        })
+
+        var date = new Date("may 10, 2024 12:12:00").getTime();
+
+        var x = setInterval(function () {
+
+            var now = new Date().getTime();
+
+            var Rimening = date - now;
+
+            var days = Math.floor(Rimening / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((Rimening % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((Rimening % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((Rimening % (1000 * 60)) / 1000);
+
+            document.getElementById("count").innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+
+            if (Rimening < 0) {
+                clearInterval(x);
+                document.getElementById("count").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+
+        let qutoes = ["You will face many defeats in life, but never let yourself be defeated.",
+            "Life is a long lesson in humility",
+            "To thine own self, be true."];
+
+        let index = 0;
+        setInterval(function () {
+            index = (index + 1) % qutoes.length;
+            document.getElementById("qutoes").innerHTML = qutoes[index]
+        }, 1000)
+    </script>
+</body>
+
+</html>
